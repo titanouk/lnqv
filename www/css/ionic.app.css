@@ -9818,7 +9818,7 @@ a.button {
 /*----------------------------------------*/
 .bar.bar-stable {
   /*box-shadow: none;*/
-  background: #f1c40f;
+  background: #1FA055;
   background-size: 100% 100%; }
   .bar.bar-stable .title {
     color: #fff;
@@ -9846,10 +9846,10 @@ a.button {
     padding: 3px 6px; }
 
 .bar-stable, .bar-stable.activated {
-  background-color: #f1c40f !important; }
+  background-color: #1FA055 !important; }
 
 .bar.bar-subheader {
-  background: #f1c40f;
+  background: #1FA055;
   background-size: 100% 100%;
   /* Firefox < 19 */
   /* Firefox > 19 */
@@ -10084,7 +10084,7 @@ a.button {
 .button-bar-balanced:hover,
 .bar-balanced:hover,
 .balanced-border:hover {
-  background-color: #f1c40f !important;
+  background-color: #1FA055 !important;
   color: #fff; }
 
 .menu .bar-header {
@@ -10803,7 +10803,7 @@ ion-slide {
 
 .cart-button.button.button-fab.button-fab-bottom-right {
   bottom: 40px;
-  background-color: #f1c40f; }
+  background-color: #1FA055; }
 
 .cart-button .cartIcon {
   background-image: url("../img/cart.svg");
