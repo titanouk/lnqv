@@ -1,4 +1,4 @@
-<ion-view view-title="Products">
+<ion-view view-title="Produits">
 <ion-nav-title>
 	<a ng-if="cat_id>0" class="catheading" ng-click="catsShow();"><span ng-bind-html="selectedCat.title|lowercase"></span> ({{selectedCat.total}})</a>
 	<span ng-if="cat_id<=0" >{{catname}}</span> 
@@ -24,7 +24,7 @@
 						  <h2>{{tmpObj.name | lowercase}}</h2>
 						  <h3>{{tmpObj.manufacturer | lowercase}}</h3>
 						  <h3 ng-if="tmpObj.weight">Weight : {{tmpObj.weight | number:2}} {{tmpObj.weight_class | lowercase}}</h3>
-						  <h3>Product Code : {{tmpObj.id}}</h3>
+						  <h3>Code produit : {{tmpObj.id}}</h3>
 							<div class="row">
 								<div class="col col-40" >
 									<span class="price" ng-bind-html="tmpObj.price_formated"></span>
