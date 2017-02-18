@@ -17,7 +17,7 @@ angular.module('starter', ['ionic',
 'ngSanitize'
 ])
 
-.run(function($ionicPlatform,$rootScope,$ionicPopup,$cordovaToast) {
+.run(function($ionicPlatform,$rootScope,$ionicPopup,$cordovaToast,$http) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -57,6 +57,23 @@ angular.module('starter', ['ionic',
 				buttons: [ { text: 'OK',type: 'button-balanced', } ]
 			 });	
 		 };
+    
+    //--------Admin Token---------------------
+    if($rootScope.adminToken=='' || typeof($rootScope.adminToken)=='undefined'){
+                       $rootScope.getAdminToken = function(){
+                       $http.get("data/config.json").success(function(data){
+                                                             $rootScope.adminToken=data.adminToken;
+                                                             })
+                       .error(function(data){
+                              alert("Erreur durant la configuration");
+                              });
+                       }
+                       /*
+                       configService.getAdminToken().then(function(response)){
+                            $rootScope.adminToken = 'lf3wo8tg3b71y1mjfjux87wxnopd640b';
+                       }
+                        */
+    }
 
 	//----------------------
   });
