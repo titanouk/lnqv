@@ -13,9 +13,21 @@ angular.module('starter.controllers')
 	//--------Banners------------------------
 	dashboardService.getBanners()
 	.then(function(response) {
-		$rootScope.bannerData=response.data.appbanners.slider;		
-	}, function(error) {
-		$rootScope.tostMsg(error);
+		//$rootScope.bannerData=response.data.appbanners.slider;
+          // Build table with banner images WIP
+        $rootScope.bannerData=response.data.items;
+          
+          forEach($rootScope.bannerData, function(value,key){
+                  console.log("content="+key+" ": "+"value);
+                  })
+/*
+        $scope.trustHtml = function(content){
+          return $sce.trustAsHtml(content);
+        }
+ */
+    
+    }, function(error) {
+		$rootScope.showAlert("web service error : "+error);
 	});
 	//--------Get User Data---------------------
 	if($rootScope.userData=='' || typeof($rootScope.userData)=='undefined'){

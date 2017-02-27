@@ -26,10 +26,10 @@ angular.module('starter.controllers')
 						progressService.hideLoader();
 						$timeout(function(){ $location.path("app/dashboard");  }, 1500);
 					} else {
-						$scope.userAddress = 'Location not found';
+						$scope.userAddress = 'Location non trouv&eacute;';
 					}
 				} else {
-					$scope.userAddress = 'Geocoder failed due to: ' + status;
+					$scope.userAddress = 'G&eacute;olocation a &eacute;chou&eacute;e pour la raison suivante : ' + status;
 				}
 			});
 	}
