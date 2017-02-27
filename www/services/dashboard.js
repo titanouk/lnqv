@@ -21,7 +21,7 @@ angular.module('starter.services')
                       },
                       params: {
                       "searchCriteria[filterGroups][0][filters][0][field]": "identifier",
-                      "searchCriteria[filterGroups][0][filters][0][value]": "dashBoardAd%",
+                      "searchCriteria[filterGroups][0][filters][0][value]": "bannerDashBoard%",
                       "searchCriteria[filterGroups][0][filters][0][conditionType]": "like"
                       }
                       })

@@ -6,10 +6,10 @@ angular.module('starter.services')
          
          this.initialize = function() {
          $http.get("data/config.json").success(function (c) {
-                                               console.log("configs="+c.config.adminToken);
                                                settings = c;
                                                $rootScope.adminToken = c.config.adminToken;
                                                $rootScope.endPoint = c.config.endPoint;
+                                               $rootScope.cmsPoint = c.config.cmsPoint;
                                                }).error(function(data){
                                                         console.log("Error during configuration");
                                                         })

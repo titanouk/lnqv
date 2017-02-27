@@ -17,15 +17,11 @@ angular.module('starter.controllers')
           // Build table with banner images WIP
         $rootScope.bannerData=response.data.items;
           
-          forEach($rootScope.bannerData, function(value,key){
-                  console.log("content="+key+" ": "+"value);
-                  })
-/*
-        $scope.trustHtml = function(content){
-          return $sce.trustAsHtml(content);
-        }
- */
-    
+          angular.forEach($rootScope.bannerData, function(value,key){
+                          var urlbanner = $rootScope.cmsPoint+value.content.substring(26);
+                          urlbanner = urlbanner.substring(0,urlbanner.indexOf('}}')-1);
+                          $rootScope.bannerData[key].content = urlbanner;
+                  });
     }, function(error) {
 		$rootScope.showAlert("web service error : "+error);
 	});

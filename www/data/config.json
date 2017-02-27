@@ -1,6 +1,7 @@
 {"config":
 {
     "adminToken": "lf3wo8tg3b71y1mjfjux87wxnopd640b",
-    "endPoint": "http://lnqv.in/index.php/rest/V1/"
+    "endPoint": "http://lnqv.in/index.php/rest/V1/",
+    "cmsPoint": "http://lnqv.in/pub/media/"
 }
 }
