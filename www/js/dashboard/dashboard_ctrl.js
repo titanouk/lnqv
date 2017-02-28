@@ -1,11 +1,22 @@
 angular.module('starter.controllers')
-.controller('DashboardCtrl', function($scope,$rootScope,$ionicModal,usersService,categoryService,dashboardService,ionicMaterialInk) {
+.controller('DashboardCtrl', function($scope,$rootScope,$ionicModal,usersService,categoryService,categoriesService,dashboardService,ionicMaterialInk) {
 	'use strict';
 	
 	//--------Get Category------------------------
-    categoryService.getCategories()
+    categoriesService.getCategories()
 		.then(function(response) {			
-			$rootScope.accordionArray = response.data.data;
+			$rootScope.accordionArray = response.data.children_data;
+              angular.forEach($rootScope.accordionArray, function(value,key){
+                              categoryService.getCategory($rootScope.accordionArray[key].id)
+                              .then(function(response){
+                                    var cat = response.data;
+                                    angular.forEach(cat.custom_attributes, function(v,k){
+                                                    if (cat.custom_attributes[k].attribute_code == "image"){
+                                                    $rootScope.accordionArray[key].icon = $rootScope.cmsPoint+"catalog/category/"+cat.custom_attributes[k].value;
+                                                    }
+                                                    });
+                                    })
+                              });
 			$rootScope.searchDefaultCats = getAutoSuggest($rootScope.accordionArray);
 		}, function(error) {
 			$rootScope.tostMsg(error);
@@ -13,8 +24,6 @@ angular.module('starter.controllers')
 	//--------Banners------------------------
 	dashboardService.getBanners()
 	.then(function(response) {
-		//$rootScope.bannerData=response.data.appbanners.slider;
-          // Build table with banner images WIP
         $rootScope.bannerData=response.data.items;
           
           angular.forEach($rootScope.bannerData, function(value,key){
