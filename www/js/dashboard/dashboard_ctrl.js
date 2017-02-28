@@ -5,17 +5,21 @@ angular.module('starter.controllers')
 	//--------Get Category------------------------
     categoriesService.getCategories()
 		.then(function(response) {			
-			$rootScope.accordionArray = response.data.children_data;
-              angular.forEach($rootScope.accordionArray, function(value,key){
-                              categoryService.getCategory($rootScope.accordionArray[key].id)
+			$rootScope.categoriesArray = response.data.children_data;
+              $rootScope.accordionArray=[];
+              angular.forEach($rootScope.categoriesArray, function(value,key){
+                              categoryService.getCategory($rootScope.categoriesArray[key].id)
                               .then(function(response){
                                     var cat = response.data;
                                     angular.forEach(cat.custom_attributes, function(v,k){
                                                     if (cat.custom_attributes[k].attribute_code == "image"){
-                                                    $rootScope.accordionArray[key].icon = $rootScope.cmsPoint+"catalog/category/"+cat.custom_attributes[k].value;
+                                                    $rootScope.categoriesArray[key].icon = $rootScope.cmsPoint+"catalog/category/"+cat.custom_attributes[k].value;
                                                     }
                                                     });
                                     })
+                              if ($rootScope.categoriesArray[key].id!==undefined){
+                              $rootScope.accordionArray.push({category_id:$rootScope.categoriesArray[key].id,title:$rootScope.categoriesArray[key].name});
+                              }
                               });
 			$rootScope.searchDefaultCats = getAutoSuggest($rootScope.accordionArray);
 		}, function(error) {
