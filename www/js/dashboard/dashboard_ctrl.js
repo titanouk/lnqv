@@ -17,7 +17,13 @@ angular.module('starter.controllers')
                                                     }
                                                     });
                                     })
-                              if ($rootScope.categoriesArray[key].id!==undefined){
+                              if ($rootScope.categoriesArray[key].children_data!==undefined){
+                              $scope.subcat = [];
+                              angular.forEach($rootScope.categoriesArray[key].children_data, function(v,k){
+                                              $scope.subcat.push({category_id:$rootScope.categoriesArray[key].children_data[k].id,title:$rootScope.categoriesArray[key].children_data[k].name});
+                                              })
+                              $rootScope.accordionArray.push({category_id:$rootScope.categoriesArray[key].id,title:$rootScope.categoriesArray[key].name,subCollection:$scope.subcat});
+                              } else {
                               $rootScope.accordionArray.push({category_id:$rootScope.categoriesArray[key].id,title:$rootScope.categoriesArray[key].name});
                               }
                               });
