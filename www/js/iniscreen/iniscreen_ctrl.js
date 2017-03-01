@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('IniscreenCtrl', function($scope,$rootScope,$location,$ionicSideMenuDelegate,$ionicHistory) {
+.controller('IniscreenCtrl', function($scope,$rootScope,$location,$localStorage,$ionicSideMenuDelegate,$ionicHistory) {
 	'use strict';
 
 	$ionicSideMenuDelegate.canDragContent(false); // hide sidemenu
@@ -91,16 +91,31 @@ angular.module('starter.controllers')
 
 })
 
-.controller('IniLoginCtrl', function($scope,$rootScope,$location,$ionicSideMenuDelegate,$ionicHistory) {
+.controller('IniLoginCtrl', function($scope,$rootScope,$location,$localStorage,$ionicSideMenuDelegate,$ionicHistory,authenticationService) {
 	'use strict';
 	$ionicSideMenuDelegate.canDragContent(false); // hide sidemenu
 	
-	$scope.iniLogin = {email:'',password:''};	
+	$scope.iniLogin = {username:'',password:''};
 	
 	$scope.userLogin = function(form){
-		if(form.$valid) {			
-			if($scope.iniLogin.email=="sales@opensourcetechnologies.com" && $scope.iniLogin.password=="demo1234"){
-				$location.path("app/dashboard");
+		if(form.$valid) {
+			if($scope.iniLogin.email!==undefined && $scope.iniLogin.password!==undefined){
+            var formData = {
+            username: $scope.iniLogin.email,
+            password: $scope.iniLogin.password
+            }
+            authenticationService.userLogin(formData, function(res){
+                                        if (res.type==false){
+                                        $rootScope.showAlert("Erreur. Utilisateur ou mot de passe incorect");
+                                        } else {
+                                        console.log("res="+res);
+                                        $localStorage.token = res;
+                                        $rootScope.customerToken = res;
+                                        $location.path("app/dashboard");
+                                        }
+                                        }, function(){
+                                        $rootScope.showAlert("Erreur. Utilisateur ou mot de passe incorect");
+                                        })
 			}
 			else{
 				$rootScope.tostMsg("Invalid Credential");
