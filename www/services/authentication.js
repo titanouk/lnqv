@@ -1,7 +1,7 @@
 angular.module('starter.services')
 .factory('authenticationService', function($http,$rootScope,$localStorage) {
          'use strict';
-
+/*
          function changeUser(user){
          angular.extend(currentUser,user);
          }
@@ -34,7 +34,7 @@ angular.module('starter.services')
          }
          
          var currentUser = getUserFromToken();
-         
+         */
          return {
          userLogin: function(data, success, error){
          $http({

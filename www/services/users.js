@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('usersService', function($http) {
+.factory('usersService', function($http,$rootScope,$localStorage) {
   'use strict';
 
   var service = {   
@@ -11,7 +11,7 @@ angular.module('starter.services')
     },
 	getCountries: function () {
 		 return $http.get("/data/user/countries.json");
-    },
+    }
 	
   };
 

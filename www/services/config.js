@@ -10,6 +10,8 @@ angular.module('starter.services')
                                                $rootScope.adminToken = c.config.adminToken;
                                                $rootScope.endPoint = c.config.endPoint;
                                                $rootScope.cmsPoint = c.config.cmsPoint;
+                                               $rootScope.consumerKey = c.config.consumerKey;
+                                               $rootScope.consumerSecret = c.config.consumerSecret;
                                                }).error(function(data){
                                                         console.log("Error during configuration");
                                                         })

@@ -2,6 +2,8 @@
 {
     "adminToken": "lf3wo8tg3b71y1mjfjux87wxnopd640b",
     "endPoint": "http://lnqv.in/index.php/rest/V1/",
-    "cmsPoint": "http://lnqv.in/pub/media/"
+    "cmsPoint": "http://lnqv.in/pub/media/",
+    "consumerKey": "vn2ndlyf1h4cly3fve82xye0j0frkuan",
+    "consumerSecret": "vn2ndlyf1h4cly3fve82xye0j0frkuan"
 }
 }

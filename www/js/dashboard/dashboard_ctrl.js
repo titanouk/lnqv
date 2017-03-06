@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('DashboardCtrl', function($scope,$rootScope,$ionicModal,usersService,categoryService,categoriesService,dashboardService,ionicMaterialInk) {
+.controller('DashboardCtrl', function($scope,$rootScope,$ionicModal,usersService,categoryService,categoriesService,dashboardService,initializationService,ionicMaterialInk) {
 	'use strict';
 	
 	//--------Get Category------------------------
@@ -54,6 +54,13 @@ angular.module('starter.controllers')
 		});
 	}
 	//----------------------------------
+            
+            //-------Populate attributes data------
+            //wine_color=initializationService.getAttributes("wine_color");
+            //console.log("wine color="+JSON.stringify(wine_color));
+            
+            //-------------------------------------
+
 	
 	ionicMaterialInk.displayEffect();
 });

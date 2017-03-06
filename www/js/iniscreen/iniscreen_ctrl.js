@@ -91,7 +91,7 @@ angular.module('starter.controllers')
 
 })
 
-.controller('IniLoginCtrl', function($scope,$rootScope,$location,$localStorage,$ionicSideMenuDelegate,$ionicHistory,authenticationService) {
+.controller('IniLoginCtrl', function($scope,$rootScope,$location,$localStorage,$ionicSideMenuDelegate,$ionicHistory,authenticationService,cartService,customerService) {
 	'use strict';
 	$ionicSideMenuDelegate.canDragContent(false); // hide sidemenu
 	
@@ -108,9 +108,20 @@ angular.module('starter.controllers')
                                         if (res.type==false){
                                         $rootScope.showAlert("Erreur. Utilisateur ou mot de passe incorect");
                                         } else {
-                                        console.log("res="+res);
                                         $localStorage.token = res;
                                         $rootScope.customerToken = res;
+                                            customerService.getCustomer(function(r){
+                                                                        $rootScope.customer = r;
+                                                                        $localStorage.customer = r;
+                                                                        }, function(error){
+                                                                        $rootScope.showAlert("Impossible de lire les infos client="+JSON.stringify(error));
+                                                                        });
+                                            cartService.createEmptyCart(function(r){
+                                                                         $rootScope.customerCartId = r;
+                                                                         $localStorage.customerCartId = r;
+                                                                         }, function(error){
+                                                                         $rootScope.showAlert("Erreur de creation du panier="+JSON.stringify(error));
+                                                                         });
                                         $location.path("app/dashboard");
                                         }
                                         }, function(){
