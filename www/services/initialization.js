@@ -1,10 +1,10 @@
 angular.module('starter.services')
-.service('initializationService', function($rootScope,$http) {
+.service('initializationService', function($rootScope,$http,$localStorage) {
 'use strict';
          
          return {
          getAttributes: function(attributeCode, success, error) {
-         $http.get({
+         $http({
                    method: "GET",
                    url: $rootScope.endPoint+"products/attributes/"+attributeCode,
                    headers: {

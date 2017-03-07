@@ -1,5 +1,5 @@
 angular.module('starter.services')
-.factory('productsService', function($rootScope,$http) {
+.factory('productsService', function($rootScope,$http,$localStorage, categoryService) {
   'use strict';
 
   var service = {
@@ -32,7 +32,21 @@ angular.module('starter.services')
 			var showloader = 'Y'; if(paged>1)showloader = 'N';*/
 
 		
-		  return $http.get("data/product/products1-5-1-ASC-name.json");
+		  //return $http.get("data/product/products1-5-1-ASC-name.json");
+
+         return $http({
+                      method: "GET",
+                      url: $rootScope.endPoint+"products",
+                      headers: {
+                      "Authorization": "Bearer "+$rootScope.adminToken,
+                      "Content-Type": "application/json"
+                      },
+                      params: {
+                      "searchCriteria[filter_groups][0][filters][0][field]": "sku",
+                      "searchCriteria[filter_groups][0][filters][0][value]": "%"+title+"%",
+                      "searchCriteria[filter_groups][0][filters][0][condition_type]": "like"
+                      }
+         });
     },
     getProductDetail: function (pro_id) {
 		 

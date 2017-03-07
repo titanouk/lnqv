@@ -73,3 +73,20 @@ function toObject(arr) {
   return rv;
 }
 
+function removeAccents (str) {
+    map = {
+        'a' : 'á|à|ã|â|À|Á|Ã|Â',
+        'e' : 'é|è|ê|É|È|Ê',
+        'i' : 'í|ì|î',
+        'o' : 'ó|ò|ô|õ|Ó|Ò|Ô|Õ',
+        'u' : 'ú|ù|û|ü|Ú|Ù|Û|Ü',
+        'c' : 'ç|Ç',
+        'n' : 'ñ|Ñ'
+    };
+    
+    angular.forEach(map, function (pattern, newValue) {
+                    str = str.replace(new RegExp(pattern, 'g'), newValue);
+                    });
+    
+    return str;
+};

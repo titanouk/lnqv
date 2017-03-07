@@ -20,23 +20,22 @@
 			  <ion-content direction="y" class="subContent"  scroll="true"   lazy-scroll>
 					<div class="list products" ng-repeat="tmpObj in products">
 						<div class="item item-thumbnail-left">
-						  <img image-lazy-src="{{tmpObj.image!=null ? tmpObj.image : 'img/no-image.jpg' }}" ng-click="showProductDetail(tmpObj.id);" image-lazy-loader="spiral" image-lazy-distance-from-bottom-to-load="-10">
+						  <img ng-repeat="attribute in tmpObj.custom_attributes | filter:{attribute_code:'thumbnail'}" image-lazy-src="{{attribute.value!=null ? cmsPoint+'catalog/product'+attribute.value : 'img/no-image.jpg' }}" ng-click="showProductDetail(tmpObj.id);" image-lazy-loader="spiral" image-lazy-distance-from-bottom-to-load="-10">
 						  <h2>{{tmpObj.name | lowercase}}</h2>
-						  <h3>{{tmpObj.manufacturer | lowercase}}</h3>
-						  <h3 ng-if="tmpObj.weight">Weight : {{tmpObj.weight | number:2}} {{tmpObj.weight_class | lowercase}}</h3>
+						  <h3 ng-repeat="attribute in tmpObj.custom_attributes | filter:{attribute_code:'short_description'}"><div ng-bind-html="attribute.value"></div></h3>
 						  <h3>Code produit : {{tmpObj.id}}</h3>
 							<div class="row">
 								<div class="col col-40" >
-									<span class="price" ng-bind-html="tmpObj.price_formated"></span>
-									<span class="saleprice" id="sprice_{{tmpObj.id}}" ng-bind-html="tmpObj.special_formated"></span>									
+									<span class="saleprice" ng-bind-html="tmpObj.price"></span>
+									<span class="saleprice">&euro;</span>
 								</div>
 							<div class="col col-60" >
 
-									<ul ng-if="tmpObj.quantity>0" id="cartbtn_{{tmpObj.id}}" class='tg-list'>
+									<ul ng-if="tmpObj.quantity==null" id="cartbtn_{{tmpObj.id}}" class='tg-list'>
 									<li class='tg-list-item'>
 										<input class='tgl tgl-flip' id='cb{{tmpObj.id}}' checked ng-if="selectId==tmpObj.id"  type='checkbox' > 
 										<input class='tgl tgl-flip' id='cb{{tmpObj.id}}' ng-if="selectId!=tmpObj.id"   ng-click="AddToCart(tmpObj)" type='checkbox' >
-										<label class='tgl-btn' data-tg-off='Add' data-tg-on='Done' for='cb{{tmpObj.id}}'></label>
+										<label class='tgl-btn' data-tg-off='Je veux &ccedil;a' data-tg-on='Done' for='cb{{tmpObj.id}}'></label>
 									</li>
 									</ul>
 									<div ng-show="tmpObj.quantity<=0" id="nostock_{{tmpObj.id}}"  class="outofStock">Pas de Stock</div>

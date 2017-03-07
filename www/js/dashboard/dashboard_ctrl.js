@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('DashboardCtrl', function($scope,$rootScope,$ionicModal,usersService,categoryService,categoriesService,dashboardService,initializationService,ionicMaterialInk) {
+.controller('DashboardCtrl', function($scope,$rootScope,$ionicModal,$localStorage,usersService,categoryService,categoriesService,dashboardService,initializationService,ionicMaterialInk) {
 	'use strict';
 	
 	//--------Get Category------------------------
@@ -56,8 +56,61 @@ angular.module('starter.controllers')
 	//----------------------------------
             
             //-------Populate attributes data------
-            //wine_color=initializationService.getAttributes("wine_color");
-            //console.log("wine color="+JSON.stringify(wine_color));
+            initializationService.getAttributes("wine_color",function(response){
+                                                $localStorage.wine_colors = response.options;
+                                                },function(error){
+            console.log("Impossible de charger les donnees de couleur de vin="+JSON.stringify(error));
+            });
+            initializationService.getAttributes("wine_grape",function(response){
+                                                $localStorage.wine_grapes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de cepage="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("wine_area",function(response){
+                                                $localStorage.wine_areas = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees appelation="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("wine_size",function(response){
+                                                $localStorage.wine_sizes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de taille de vin="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("apero_size",function(response){
+                                                $localStorage.apero_sizes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de taille de apero="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("apero_type",function(response){
+                                                $localStorage.apero_types = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de type de apero="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("digestif_size",function(response){
+                                                $localStorage.digestif_sizes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de taille de digestif="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("digestif_type",function(response){
+                                                $localStorage.digestif_types = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de type de digestif="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("beer_size",function(response){
+                                                $localStorage.beer_sizes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de taille de bieres="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("beer_type",function(response){
+                                                $localStorage.wine_sizes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de types de biere="+JSON.stringify(error));
+                                                });
+            initializationService.getAttributes("softs_size",function(response){
+                                                $localStorage.wine_sizes = response.options;
+                                                },function(error){
+                                                console.log("Impossible de charger les donnees de taille de softs="+JSON.stringify(error));
+                                                });
             
             //-------------------------------------
 

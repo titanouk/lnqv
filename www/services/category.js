@@ -17,7 +17,7 @@ angular.module('starter.services')
                       method: "GET",
                       url: $rootScope.endPoint+"categories/"+id,
                       headers: {
-                      //"Authorization": "Bearer "+$rootScope.adminToken,
+                      "Authorization": "Bearer "+$rootScope.adminToken,
                       "Content-Type": "application/json"
                       }
          })

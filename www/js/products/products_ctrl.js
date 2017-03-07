@@ -1,5 +1,5 @@
 angular.module('starter.controllers')
-.controller('ProductsCtrl', function($scope,$rootScope,$location,$timeout,$ionicModal,$stateParams,$ionicScrollDelegate,productsService,progressService,eCart,ionicMaterialInk) {
+.controller('ProductsCtrl', function($scope,$rootScope,$location,$timeout,$ionicModal,$stateParams,$ionicScrollDelegate,productsService,categoryService,progressService,eCart,ionicMaterialInk) {
 	'use strict';
 	
    $scope.cat_id	= $stateParams.catid;
@@ -9,18 +9,19 @@ angular.module('starter.controllers')
    $scope.noRecords = false;
    //----------Lasy Loading of Products---------------------------
    $scope.loadMoreProducts = function(){
-	    $scope.cat_id=1;
+	    //$scope.cat_id=1;
 		$scope.noRecords = false;
+            /*
 		if($scope.cat_id !=1 && $scope.cat_id !=7){
 			$scope.noProductsAvailable = true;
 			$scope.noRecords = true;		
 		}
-		else{
+		else{*/
 			productsService.getProducts($scope.cat_id,$scope.catname,$scope.product_page)
 			.then(function(response) {
-				if(response.data.success){
-					$scope.products		= $scope.products.concat(response.data.data);
-					$scope.newProducts	= $scope.newProducts.concat(response.data.latest_products);
+				if(response.data){
+					$scope.products		= $scope.products.concat(response.data.items);
+					$scope.newProducts	= $scope.newProducts.concat(response.data.items);
 
 					$scope.product_page++;
 					$scope.noProductsAvailable = false; // On lasy loading.
@@ -32,8 +33,9 @@ angular.module('starter.controllers')
 
 			}, function(error) {
 				 $scope.noProductsAvailable = true; // Off lasy loading.
+                  console.log("Erreur durant le chargement des produits="+JSON.stringify(error));
 			});
-		}
+		//}
 		
    }
   
@@ -41,18 +43,24 @@ angular.module('starter.controllers')
 	 $rootScope.showProducts = function(cat_id){
 		//$scope.category_id =$scope.cat_id;
 		if(cat_id!='' && typeof(cat_id)!='undefined') $scope.cat_id = cat_id; 
-		
-		$ionicScrollDelegate.scrollTop();
-		$scope.selectedCat = findCategory($rootScope.accordionArray,$scope.cat_id);
-		$scope.parentCats  = getParentCat($rootScope.accordionArray,$scope.cat_id);
-	
-		$scope.noProductsAvailable	= true; // Off lasy loading.
-		$scope.product_page = 1;
-		$scope.products		   = [];
-		$scope.newProducts	   = [];
-
-		$scope.loadMoreProducts();
-	 }	 
+        
+        $ionicScrollDelegate.scrollTop();
+		//$scope.selectedCat = findCategory($rootScope.accordionArray,$scope.cat_id);
+        categoryService.getCategory($scope.cat_id)
+            .then(function(response){
+                  $scope.selectedCat = response.data;
+                  $scope.catname = removeAccents($scope.selectedCat.name);
+                  $scope.catname = angular.lowercase($scope.catname.replace(/ /g, ''));
+                  $scope.parentCats  = getParentCat($rootScope.accordionArray,$scope.cat_id);
+                  
+                  $scope.noProductsAvailable	= true; // Off lasy loading.
+                  $scope.product_page = 1;
+                  $scope.products		   = [];
+                  $scope.newProducts	   = [];
+                  
+                  $scope.loadMoreProducts();
+                  });
+	 }
 	  $rootScope.showProducts();
    //---------------------------
  
