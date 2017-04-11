@@ -1,9 +1,10 @@
 {"config":
 {
-    "adminToken": "lf3wo8tg3b71y1mjfjux87wxnopd640b",
+    "adminToken": "dsod67ps11p7i6ssbs3sji173609rrgx",
     "endPoint": "http://lnqv.in/index.php/rest/V1/",
     "cmsPoint": "http://lnqv.in/pub/media/",
-    "consumerKey": "vn2ndlyf1h4cly3fve82xye0j0frkuan",
-    "consumerSecret": "vn2ndlyf1h4cly3fve82xye0j0frkuan"
+    "consumerKey": "048rvs52oy0wodolo3hcgekjkk7009h0",
+    "consumerSecret": "e4963ds9vw837419lbfjfq2b42fdrrtr",
+    "rootCategoryId": "2"
 }
 }
